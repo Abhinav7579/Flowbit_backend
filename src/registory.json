@@ -1,0 +1,10 @@
+[
+  {
+    "tenant": "68793475dd28060b287faefe",            
+    "screenUrl": "/support/home"   
+  },
+  {
+    "tenant": "68793e0ba11a9bb5d1a3401f",
+    "screenUrl": "/billing/home"
+  }
+]
