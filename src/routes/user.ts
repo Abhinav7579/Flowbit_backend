@@ -1,11 +1,11 @@
 import express from "express";
 const userRouter = express.Router();
 import axios from "axios"
+import path from "path";
 import { userRequiredBody,SigninRequiredbody } from "../zod";
 import { userModel } from "../db";
 import bcrypt from "bcrypt"
 const fs = require('fs');
-const path = require('path');
 import { middleware } from "../middleware";
 const JWT_PASS = process.env.JWT_PASS!;
 import jwt from "jsonwebtoken"
@@ -91,7 +91,7 @@ userRouter.post("/signin",async(req,res)=>{
 userRouter.get("/me/screens",middleware,(req, res) => {
     const tenant = req.id;
     console.log(tenant);
-    const registryPath = path.join(__dirname,'../registory.json');
+    const registryPath = path.resolve(process.cwd(), "registory.json");
 
     fs.readFile(registryPath, 'utf8', (err: NodeJS.ErrnoException |null,data: string) => {
         if (err) {

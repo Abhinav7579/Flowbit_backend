@@ -14,11 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const userRouter = express_1.default.Router();
+const path_1 = __importDefault(require("path"));
 const zod_1 = require("../zod");
 const db_1 = require("../db");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const fs = require('fs');
-const path = require('path');
 const middleware_1 = require("../middleware");
 const JWT_PASS = process.env.JWT_PASS;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -97,7 +97,8 @@ userRouter.post("/signin", (req, res) => __awaiter(void 0, void 0, void 0, funct
 }));
 userRouter.get("/me/screens", middleware_1.middleware, (req, res) => {
     const tenant = req.id;
-    const registryPath = path.join(__dirname, '../registry.json');
+    console.log(tenant);
+    const registryPath = path_1.default.resolve(process.cwd(), "registory.json");
     fs.readFile(registryPath, 'utf8', (err, data) => {
         if (err) {
             return res.status(500).json({
