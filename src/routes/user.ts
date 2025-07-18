@@ -90,12 +90,14 @@ userRouter.post("/signin",async(req,res)=>{
 })
 userRouter.get("/me/screens",middleware,(req, res) => {
     const tenant = req.id;
+    console.log(tenant);
     const registryPath = path.join(__dirname,'../registry.json');
 
     fs.readFile(registryPath, 'utf8', (err: NodeJS.ErrnoException |null,data: string) => {
         if (err) {
             return res.status(500).json({ 
-                error: "Unable to read registry" 
+                id:tenant,
+                error: "Unable to read registryyy" 
             });
         }
         try {
