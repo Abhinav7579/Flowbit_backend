@@ -69,5 +69,26 @@ ticketRouter.post("/webhook/ticket-done",async(req,res)=>{
 
 })
 
+ticketRouter.get("/status", middleware, async (req, res) => {
+  const customer = req.id;
+
+  try {
+    const ticket = await ticketModel.findOne({
+      CustomerId: customer
+    });
+
+    if (!ticket) {
+      return res.status(404).json({ message: "No ticket found" });
+    }
+
+    res.json({
+      status: ticket.status
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 
 export default ticketRouter;
